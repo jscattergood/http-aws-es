@@ -24,7 +24,7 @@ class HttpAmazonESConnector extends HttpConnector {
     if (port) endpoint.port = port;
 
     this.AWS = AWS;
-    this.signRegion = config.signRegion || this.AWS.config.region;
+    this.hostRegion = config.hostRegion || this.AWS.config.region;
     this.endpoint = endpoint;
   }
 
@@ -66,7 +66,7 @@ class HttpAmazonESConnector extends HttpConnector {
     for (let p in reqParams) {
       request[p] = reqParams[p];
     }
-    request.region = this.signRegion;
+    request.region = this.hostRegion;
     if (params.body) request.body = params.body;
     if (!request.headers) request.headers = {};
     request.headers['presigned-expires'] = false;
